@@ -17,7 +17,6 @@ class Calculadora {
   }
 
   private configurarBotoes() {
-    // Adicione os botões à calculadora
     this.teclado.adicionarBotao(new Botao("0"));
     this.teclado.adicionarBotao(new Botao("1"));
     this.teclado.adicionarBotao(new Botao("2"));
