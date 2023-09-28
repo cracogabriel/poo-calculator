@@ -1,4 +1,4 @@
-import { Calculator } from "./calculator";
+import { Calculator } from "./src/calculator";
 
 const calculator = new Calculator();
 calculator.pressButton("2");
