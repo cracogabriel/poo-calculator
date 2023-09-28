@@ -1,4 +1,4 @@
-import { OperatorsEnum } from "./utils/Enums";
+import { OperatorsEnum } from "../utils/Enums";
 
 class Cpu {
   calculateExpression(expression: string): number {

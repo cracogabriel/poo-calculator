@@ -2,7 +2,7 @@ import { Keyboard } from "./keyboard";
 import { Screen } from "./screen";
 import { Cpu } from "./cpu";
 import Button from "./button";
-import { ControlEnum, NumbersEnum, OperatorsEnum } from "./utils/Enums";
+import { ControlEnum, NumbersEnum, OperatorsEnum } from "../utils/Enums";
 
 class Calculator {
   private keyboard: Keyboard;
