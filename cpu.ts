@@ -1,93 +1,94 @@
 class Cpu {
-  calcularExpressao(expressao: string): number {
-    try {
-      const resultado = this.analisarExpressao(expressao);
-      return resultado;
-    } catch (error: any) {
-      throw new Error("Erro ao calcular a expressão: " + error.message);
-    }
-  }
-
-  private analisarExpressao(expressao: string): number {
-    const operadoresPrioritarios = ["*", "/"];
-    const operadoresSecundarios = ["+", "-"];
-
-    const numeros: number[] = [];
-    const operadores: string[] = [];
-    let numeroAtual = "";
-
-    for (let i = 0; i < expressao.length; i++) {
-      const char = expressao.charAt(i);
-
-      if (/[0-9.]/.test(char)) {
-        numeroAtual += char;
-      } else if (/[+\-*/]/.test(char)) {
-        if (numeroAtual !== "") {
-          numeros.push(parseFloat(numeroAtual));
-          numeroAtual = "";
-        }
-
-        if (operadoresPrioritarios.includes(char)) {
-          while (
-            operadores.length > 0 &&
-            operadoresPrioritarios.includes(operadores[operadores.length - 1])
-          ) {
-            const operador = operadores.pop()!;
-            const b = numeros.pop()!;
-            const a = numeros.pop()!;
-            const resultadoOperacao = this.executarOperacao(a, b, operador);
-            numeros.push(resultadoOperacao);
-          }
-        } else if (operadoresSecundarios.includes(char)) {
-          while (operadores.length > 0) {
-            const operador = operadores.pop()!;
-            const b = numeros.pop()!;
-            const a = numeros.pop()!;
-            const resultadoOperacao = this.executarOperacao(a, b, operador);
-            numeros.push(resultadoOperacao);
-          }
-        }
-
-        operadores.push(char);
-      } else if (char === " ") {
-        continue;
-      } else {
-        throw new Error("Caractere inválido na expressão");
+    calculateExpression(expression: string): number {
+      try {
+        const result = this.parseExpression(expression);
+        return result;
+      } catch (error: any) {
+        throw new Error("Error calculating the expression: " + error.message);
       }
     }
-
-    if (numeroAtual !== "") {
-      numeros.push(parseFloat(numeroAtual));
-    }
-
-    while (operadores.length > 0) {
-      const operador = operadores.pop()!;
-      const b = numeros.pop()!;
-      const a = numeros.pop()!;
-      const resultadoOperacao = this.executarOperacao(a, b, operador);
-      numeros.push(resultadoOperacao);
-    }
-
-    return numeros[0];
-  }
-
-  private executarOperacao(a: number, b: number, operador: string): number {
-    switch (operador) {
-      case "+":
-        return a + b;
-      case "-":
-        return a - b;
-      case "*":
-        return a * b;
-      case "/":
-        if (b === 0) {
-          throw new Error("Divisão por zero");
+  
+    private parseExpression(expression: string): number {
+      const priorityOperators = ["*", "/"];
+      const secondaryOperators = ["+", "-"];
+  
+      const numbers: number[] = [];
+      const operators: string[] = [];
+      let currentNumber = "";
+  
+      for (let i = 0; i < expression.length; i++) {
+        const char = expression.charAt(i);
+  
+        if (/[0-9.]/.test(char)) {
+          currentNumber += char;
+        } else if (/[+\-*/]/.test(char)) {
+          if (currentNumber !== "") {
+            numbers.push(parseFloat(currentNumber));
+            currentNumber = "";
+          }
+  
+          if (priorityOperators.includes(char)) {
+            while (
+              operators.length > 0 &&
+              priorityOperators.includes(operators[operators.length - 1])
+            ) {
+              const operator = operators.pop()!;
+              const b = numbers.pop()!;
+              const a = numbers.pop()!;
+              const operationResult = this.performOperation(a, b, operator);
+              numbers.push(operationResult);
+            }
+          } else if (secondaryOperators.includes(char)) {
+            while (operators.length > 0) {
+              const operator = operators.pop()!;
+              const b = numbers.pop()!;
+              const a = numbers.pop()!;
+              const operationResult = this.performOperation(a, b, operator);
+              numbers.push(operationResult);
+            }
+          }
+  
+          operators.push(char);
+        } else if (char === " ") {
+          continue;
+        } else {
+          throw new Error("Invalid character in expression");
         }
-        return a / b;
-      default:
-        throw new Error("Operador inválido: " + operador);
+      }
+  
+      if (currentNumber !== "") {
+        numbers.push(parseFloat(currentNumber));
+      }
+  
+      while (operators.length > 0) {
+        const operator = operators.pop()!;
+        const b = numbers.pop()!;
+        const a = numbers.pop()!;
+        const operationResult = this.performOperation(a, b, operator);
+        numbers.push(operationResult);
+      }
+  
+      return numbers[0];
+    }
+  
+    private performOperation(a: number, b: number, operator: string): number {
+      switch (operator) {
+        case "+":
+          return a + b;
+        case "-":
+          return a - b;
+        case "*":
+          return a * b;
+        case "/":
+          if (b === 0) {
+            throw new Error("Division by zero");
+          }
+          return a / b;
+        default:
+          throw new Error("Invalid operator: " + operator);
+      }
     }
   }
-}
-
-export { Cpu };
+  
+  export { Cpu };
+  
