@@ -2,6 +2,7 @@ import { Keyboard } from "./keyboard";
 import { Screen } from "./screen";
 import { Cpu } from "./cpu";
 import Button from "./button";
+import { ControlEnum, NumbersEnum, OperatorsEnum } from "./utils/Enums";
 
 class Calculator {
   private keyboard: Keyboard;
@@ -17,22 +18,24 @@ class Calculator {
   }
 
   private configureButtons() {
-    this.keyboard.addButton(new Button("0"));
-    this.keyboard.addButton(new Button("1"));
-    this.keyboard.addButton(new Button("2"));
-    this.keyboard.addButton(new Button("3"));
-    this.keyboard.addButton(new Button("4"));
-    this.keyboard.addButton(new Button("5"));
-    this.keyboard.addButton(new Button("6"));
-    this.keyboard.addButton(new Button("7"));
-    this.keyboard.addButton(new Button("8"));
-    this.keyboard.addButton(new Button("9"));
-    this.keyboard.addButton(new Button("+"));
-    this.keyboard.addButton(new Button("-"));
-    this.keyboard.addButton(new Button("*"));
-    this.keyboard.addButton(new Button("/"));
-    this.keyboard.addButton(new Button("="));
-    this.keyboard.addButton(new Button("C"));
+    this.keyboard.addButton(new Button(NumbersEnum.ZERO));
+    this.keyboard.addButton(new Button(NumbersEnum.ONE));
+    this.keyboard.addButton(new Button(NumbersEnum.TWO));
+    this.keyboard.addButton(new Button(NumbersEnum.THREE));
+    this.keyboard.addButton(new Button(NumbersEnum.FOUR));
+    this.keyboard.addButton(new Button(NumbersEnum.FIVE));
+    this.keyboard.addButton(new Button(NumbersEnum.SIX));
+    this.keyboard.addButton(new Button(NumbersEnum.SEVEN));
+    this.keyboard.addButton(new Button(NumbersEnum.EIGHT));
+    this.keyboard.addButton(new Button(NumbersEnum.NINE));
+
+    this.keyboard.addButton(new Button(OperatorsEnum.SUM));
+    this.keyboard.addButton(new Button(OperatorsEnum.SUBTRACTION));
+    this.keyboard.addButton(new Button(OperatorsEnum.TIMES));
+    this.keyboard.addButton(new Button(OperatorsEnum.DIVISION));
+
+    this.keyboard.addButton(new Button(ControlEnum.EQUAL));
+    this.keyboard.addButton(new Button(ControlEnum.CLEAR));
   }
 
   performCalculation() {
@@ -46,9 +49,9 @@ class Calculator {
   }
 
   pressButton(value: string) {
-    if (value === "=") {
+    if (value === ControlEnum.EQUAL) {
       this.performCalculation();
-    } else if (value === "C") {
+    } else if (value === ControlEnum.CLEAR) {
       this.expression = "";
       this.screen.clearScreen();
     } else {
