@@ -1,16 +1,16 @@
 import { OperatorsEnum } from "../utils/Enums";
 
-class Cpu {
-  calculateExpression(expression: string): number {
+class CPU {
+  calculate(expression: string): string {
     try {
-      const result = this.parseExpression(expression);
-      return result;
+      const result = this.calculateExpression(expression);
+      return result.toString();
     } catch (error: any) {
       throw new Error("Error calculating the expression: " + error.message);
     }
   }
 
-  private parseExpression(expression: string): number {
+  calculateExpression(expression: string): number {
     const priorityOperators: Array<string> = [
       OperatorsEnum.TIMES,
       OperatorsEnum.DIVISION,
@@ -98,4 +98,4 @@ class Cpu {
   }
 }
 
-export { Cpu };
+export { CPU };

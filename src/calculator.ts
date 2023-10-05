@@ -1,61 +1,57 @@
+import { CPU } from "./cpu";
+import { Display } from "./display";
 import { Keyboard } from "./keyboard";
-import { Screen } from "./screen";
-import { Cpu } from "./cpu";
-import Button from "./button";
-import { ControlEnum, NumbersEnum, OperatorsEnum } from "../utils/Enums";
 
 class Calculator {
   private keyboard: Keyboard;
-  private screen: Screen;
-  private cpu: Cpu;
-  private expression: string = "";
+  private cpu: CPU;
+  private display: Display;
+  private currentInput: string;
 
   constructor() {
     this.keyboard = new Keyboard();
-    this.screen = new Screen();
-    this.cpu = new Cpu();
-    this.configureButtons();
+    this.cpu = new CPU();
+    this.display = new Display();
+    this.currentInput = "";
+
+    // Adicione os botões à calculadora
+    this.keyboard.addButton("0", "0");
+    this.keyboard.addButton("1", "1");
+    this.keyboard.addButton("2", "2");
+    this.keyboard.addButton("3", "3");
+    this.keyboard.addButton("4", "4");
+    this.keyboard.addButton("5", "5");
+    this.keyboard.addButton("6", "6");
+    this.keyboard.addButton("7", "7");
+    this.keyboard.addButton("8", "8");
+    this.keyboard.addButton("9", "9");
+    this.keyboard.addButton("+", "+");
+    this.keyboard.addButton("-", "-");
+    this.keyboard.addButton("*", "*");
+    this.keyboard.addButton("/", "/");
+    this.keyboard.addButton("=", "=");
+    this.keyboard.addButton(".", ".");
+    this.keyboard.addButton("start", "start");
   }
 
-  private configureButtons() {
-    this.keyboard.addButton(new Button(NumbersEnum.ZERO));
-    this.keyboard.addButton(new Button(NumbersEnum.ONE));
-    this.keyboard.addButton(new Button(NumbersEnum.TWO));
-    this.keyboard.addButton(new Button(NumbersEnum.THREE));
-    this.keyboard.addButton(new Button(NumbersEnum.FOUR));
-    this.keyboard.addButton(new Button(NumbersEnum.FIVE));
-    this.keyboard.addButton(new Button(NumbersEnum.SIX));
-    this.keyboard.addButton(new Button(NumbersEnum.SEVEN));
-    this.keyboard.addButton(new Button(NumbersEnum.EIGHT));
-    this.keyboard.addButton(new Button(NumbersEnum.NINE));
-
-    this.keyboard.addButton(new Button(OperatorsEnum.SUM));
-    this.keyboard.addButton(new Button(OperatorsEnum.SUBTRACTION));
-    this.keyboard.addButton(new Button(OperatorsEnum.TIMES));
-    this.keyboard.addButton(new Button(OperatorsEnum.DIVISION));
-
-    this.keyboard.addButton(new Button(ControlEnum.EQUAL));
-    this.keyboard.addButton(new Button(ControlEnum.CLEAR));
+  getKeyboard() {
+    return this.keyboard;
   }
 
-  performCalculation() {
-    try {
-      const result = this.cpu.calculateExpression(this.expression);
-      this.screen.displayResult(result.toString());
-      this.expression = result.toString();
-    } catch (error) {
-      this.screen.displayResult("Error");
-    }
-  }
+  pressButton(key: string) {
+    const buttonValue = this.keyboard.getButton(key).press();
 
-  pressButton(value: string) {
-    if (value === ControlEnum.EQUAL) {
-      this.performCalculation();
-    } else if (value === ControlEnum.CLEAR) {
-      this.expression = "";
-      this.screen.clearScreen();
+    if (buttonValue === "=") {
+      try {
+        const result = this.cpu.calculateExpression(this.currentInput);
+        this.display.set(result.toString());
+        this.currentInput = result.toString();
+      } catch (error) {
+        this.display.set("Erro");
+        this.currentInput = "";
+      }
     } else {
-      this.expression += this.keyboard.pressButton(value);
+      this.currentInput += buttonValue;
     }
   }
 }

@@ -1,11 +1,8 @@
-import { Calculator } from "./src/calculator";
+import { Display } from "./src/display";
 
-const calculator = new Calculator();
-calculator.pressButton("2");
-calculator.pressButton("+");
-calculator.pressButton("2");
-calculator.pressButton("2");
-calculator.pressButton("/");
-calculator.pressButton("1");
-calculator.pressButton("0");
-calculator.pressButton("=");
+const d1 = new Display();
+
+d1.add("1");
+d1.add("+");
+d1.add("1");
+d1.show();

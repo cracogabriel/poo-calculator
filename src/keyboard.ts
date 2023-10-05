@@ -1,24 +1,13 @@
-import Button from "./button";
+import { Button } from "./button";
 
-class Keyboard {
-  private buttons: Button[];
+export class Keyboard {
+  private buttons: Record<string, Button> = {};
 
-  constructor() {
-    this.buttons = [];
+  addButton(key: string, value: string) {
+    this.buttons[key] = new Button(value);
   }
 
-  addButton(button: Button) {
-    this.buttons.push(button);
-  }
-
-  pressButton(value: string): string {
-    for (const button of this.buttons) {
-      if (button.getValue() === value) {
-        return button.getValue();
-      }
-    }
-    throw new Error("Button not found");
+  getButton(key: string) {
+    return this.buttons[key];
   }
 }
-
-export { Keyboard };

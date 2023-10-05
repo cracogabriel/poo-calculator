@@ -1,10 +1,7 @@
-class Button {
-    constructor(private value: string) {}
-  
-    getValue(): string {
-      return this.value;
-    }
+export class Button {
+  constructor(private value: string) {}
+
+  press() {
+    return this.value;
   }
-  
-  export default Button;
-  
+}
