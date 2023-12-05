@@ -11,13 +11,13 @@ class Keyboard {
     this.buttons.push(button);
   }
 
-  pressButton(value: string): string {
+  pressButton(value: string) {
     for (const button of this.buttons) {
       if (button.getValue() === value) {
         return button.getValue();
       }
     }
-    throw new Error("Button not found");
+    throw new Error("Button not founded");
   }
 }
 

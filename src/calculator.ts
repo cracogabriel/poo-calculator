@@ -38,24 +38,30 @@ class Calculator {
     this.keyboard.addButton(new Button(ControlEnum.CLEAR));
   }
 
-  performCalculation() {
+  private performCalculation() {
     try {
       const result = this.cpu.calculateExpression(this.expression);
-      this.screen.displayResult(result.toString());
+      this.screen.show(result.toString());
       this.expression = result.toString();
     } catch (error) {
-      this.screen.displayResult("Error");
+      throw error;
     }
   }
 
   pressButton(value: string) {
-    if (value === ControlEnum.EQUAL) {
-      this.performCalculation();
-    } else if (value === ControlEnum.CLEAR) {
+    try {
+      if (value === ControlEnum.EQUAL) {
+        this.performCalculation();
+      } else if (value === ControlEnum.CLEAR) {
+        this.expression = "";
+        this.screen.clearScreen();
+      } else {
+        this.expression += this.keyboard.pressButton(value);
+        this.screen.show(this.expression);
+      }
+    } catch (error) {
+      if (typeof error === "string") this.screen.show(error);
       this.expression = "";
-      this.screen.clearScreen();
-    } else {
-      this.expression += this.keyboard.pressButton(value);
     }
   }
 }

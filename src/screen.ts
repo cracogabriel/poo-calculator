@@ -1,12 +1,11 @@
 class Screen {
-    displayResult(result: string) {
-      console.log(`Result: ${result}`);
-    }
-  
-    clearScreen() {
-      console.clear();
-    }
+  show(content: string) {
+    console.log(content);
   }
-  
-  export { Screen };
-  
+
+  clearScreen() {
+    console.clear();
+  }
+}
+
+export { Screen };

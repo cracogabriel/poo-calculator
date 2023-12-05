@@ -60,7 +60,7 @@ class Cpu {
       } else if (char === " ") {
         continue;
       } else {
-        throw new Error("Invalid character in expression");
+        throw new Error("Caractere inválido");
       }
     }
 
