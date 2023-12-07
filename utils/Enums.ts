@@ -21,4 +21,5 @@ export enum OperatorsEnum {
 export enum ControlEnum {
   EQUAL = "=",
   CLEAR = "C",
+  DECIMAL = ".",
 }

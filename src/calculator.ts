@@ -36,12 +36,13 @@ class Calculator {
 
     this.keyboard.addButton(new Button(ControlEnum.EQUAL));
     this.keyboard.addButton(new Button(ControlEnum.CLEAR));
+    this.keyboard.addButton(new Button(ControlEnum.DECIMAL));
   }
 
   private performCalculation() {
     try {
       const result = this.cpu.calculateExpression(this.expression);
-      this.screen.show(result.toString());
+      this.screen.show(result.toFixed(2));
       this.expression = result.toString();
     } catch (error) {
       throw error;
@@ -55,6 +56,9 @@ class Calculator {
       } else if (value === ControlEnum.CLEAR) {
         this.expression = "";
         this.screen.clearScreen();
+      } else if (value === ControlEnum.DECIMAL) {
+        this.expression += ".";
+        this.screen.show(this.expression);
       } else {
         this.expression += this.keyboard.pressButton(value);
         this.screen.show(this.expression);
