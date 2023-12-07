@@ -40,6 +40,6 @@ yarn start
 - Multiplicação (*);
 
 **Funcionabilidades:**
-- Sair "S" ou Pressione "Enter" sem nada escrito;
+- Sair "S" ou pressione "Enter" sem nada escrito;
 - Limpar "C";
 - Para digitos decimais use ".";
