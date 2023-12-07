@@ -4,7 +4,7 @@
 
 **Como executar:**
 
-_Para rodar o projeto, é necessário pacote Node 16+_
+_Para rodar o projeto, é necessário pacote [NodeJS 16+](https://nodejs.org/en/download/)_
 
 - Instale os pacotes Javascript usando `yarn` ou `npm`.
 
