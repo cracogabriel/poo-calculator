@@ -2,7 +2,9 @@ import { Calculator } from "./src/calculator";
 import * as readline from "readline";
 
 console.clear();
-console.log("Calculadora rodando!\n\n");
+console.log(
+  "\n\nCalculadora rodando!\n*Digite apenas uma tecla de cada vez! \n\n"
+);
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -20,7 +22,7 @@ function startCalculator() {
         return;
       }
 
-      console.log(`[LOG] Tecla pressionada: ${answer}`);
+      console.log(`\n[LOG] Tecla pressionada: ${answer}\n`);
       console.log("----------------\n");
       calculator.pressButton(answer.toUpperCase());
       console.log("\n----------------");

@@ -42,7 +42,7 @@ class Calculator {
   private performCalculation() {
     try {
       const result = this.cpu.calculateExpression(this.expression);
-      this.screen.show(result.toFixed(2));
+      this.screen.show(result.toString());
       this.expression = result.toString();
     } catch (error) {
       throw error;

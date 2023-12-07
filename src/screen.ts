@@ -4,7 +4,7 @@ class Screen {
   }
 
   clearScreen() {
-    console.clear();
+    console.log("");
   }
 }
 

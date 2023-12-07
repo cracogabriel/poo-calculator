@@ -1,10 +1,12 @@
 # poo-calculator
 
-## Um projeto feito usando boas práticas de POO
+## Um projeto usando Typescript com Orientação a Objeto - UTFPR Análise e Projeto de Software - Ciência da Computação 2 período
 
-**Para executar o projeto:**
+**Como executar:**
 
-- Instale os pacotes Javascript usando yarn ou npm
+_Para rodar o projeto, é necessário pacote Node 16+_
+
+- Instale os pacotes Javascript usando `yarn` ou `npm`.
 
 ```
 yarn install
@@ -15,9 +17,3 @@ yarn install
 ```
 yarn start
 ```
-
-**Para modificar o que deve ser calculado:**
-
-- Instancie a calculadora no arquivo **_index.ts_**;
-- Declare a função "pressionarBotao" com o que desejar;
-- O calculo será concluído quando o botão pressionado for "=".
